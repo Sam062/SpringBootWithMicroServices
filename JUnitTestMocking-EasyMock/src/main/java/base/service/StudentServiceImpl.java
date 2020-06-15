@@ -1,6 +1,10 @@
 package base.service;
 
+import java.util.List;
+
 import base.dao.IStudentDao;
+import base.exceptions.NoDataFoundException;
+import base.model.Contacts;
 
 public class StudentServiceImpl implements IStudentService {
 
@@ -10,7 +14,6 @@ public class StudentServiceImpl implements IStudentService {
 		this.dao = dao;
 	}
 
-
 	@Override
 	public String getNameByID(Integer id) {
 		String name=dao.getNameById(id);
@@ -19,4 +22,22 @@ public class StudentServiceImpl implements IStudentService {
 		return formattedName;
 	}
 
+	@Override
+	public List<String> getAllNames() {
+		List<String> list=dao.getAll();
+
+		if(!list.isEmpty())
+			return list;
+		return null;
+	}
+
+	@Override
+	public Contacts getByID(Integer id) {
+		Contacts con=dao.getByID(id);
+		if(con==null)
+			throw new NoDataFoundException();
+		return con;
+	}
+	
+	
 }

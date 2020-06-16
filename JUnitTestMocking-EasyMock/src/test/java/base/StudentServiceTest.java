@@ -52,14 +52,14 @@ public class StudentServiceTest {
 	}
 
 	@Test
-	@Ignore
+//	@Ignore
 	public void testFindNameByID_01() {
 		String name=service.getNameByID(101);
 		assertNotNull(name);
 	}
 
 	@Test
-	@Ignore
+//	@Ignore
 	public void getAllNames() {
 		List<String> allNames=service.getAllNames();
 		assertNotNull(allNames);

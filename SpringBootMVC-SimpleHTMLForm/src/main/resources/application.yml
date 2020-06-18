@@ -1,0 +1,5 @@
+server:
+  port: 9935
+
+spring:  mvc:    view:      prefix: /views/
+      suffix: .jsp

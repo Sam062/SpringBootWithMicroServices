@@ -7,8 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-
-	<h1>WELCOME TO DATA PAGE</h1>
-	${model}
+	<div style="color: green;font-family: monospace;">
+		<h1>USER REGISTERED !!</h1>
+		<h3>${user}</h3>
+	</div>
 </body>
 </html>

@@ -3,6 +3,7 @@ package base.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import base.model.User;
@@ -18,8 +19,9 @@ public class UserController {
 	}
 	
 	@PostMapping("/reg")
-	public String readForm(Model model) {
-		
+	public String readForm(@ModelAttribute("user")User user,Model model) {
+		System.out.println(user);
+		model.addAttribute("user", user.toString());
 		return "data";
 	}
 	

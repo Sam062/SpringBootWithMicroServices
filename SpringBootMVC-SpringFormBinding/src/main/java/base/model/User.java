@@ -4,9 +4,12 @@ import lombok.Data;
 
 @Data
 public class User {
-	private Integer uid;
 	private String uname;
-	private String loc;
-	private String mob;
+	private String pwd;
+	private String email;
+	private String phno;
+	private String gender;
+	private String course;
+	private String[] timing;
 
 }

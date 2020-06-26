@@ -8,32 +8,26 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 </head>
 <body>
-	<div align="center">
-		<h1 align="center">- ALL BOOKS HERE -</h1>
-		<table class="table">
-		<thead>
+	<div class="container" align="center">
+		<h1 align="center">- WELCOME TO BOOK MANAGEMENT -</h1><hr>
+		<table class="table table-bordered">
 			<tr>
-				<th><h2>Book Details</h2></th>
+				<td align="center" colspan="3" class="info"><h2>Book Details</h2></td>
 			</tr>
-		</thead>
-			<thead>
+			<tr class="danger">
+				<th>BOOK NAME</th>
+				<th>AUTHOR</th>
+				<th>PRICE</th>
+			</tr>
+			<c:forEach items="${list}" var="l">
 				<tr>
-					<th>BOOK NAME</th>
-					<th>AUTHOR</th>
-					<th>PRICE</th>
+					<td>${l.bookName }</td>
+					<td>${l.author }</td>
+					<td>${l.price }</td>
 				</tr>
-			</thead>
-			<tbody>
-				<c:forEach items="${list}" var="l">
-					<tr>
-						<td>${l.bookName }</td>
-						<td>${l.author }</td>
-						<td>${l.price }</td>
-					</tr>
-				</c:forEach>
-			</tbody>
+			</c:forEach>
 		</table>
-		<a href="home">Add New Book</a>
+		<a href="home" class="btn btn-info btn-lg">Add New Book</a>
 	</div>
 
 </body>

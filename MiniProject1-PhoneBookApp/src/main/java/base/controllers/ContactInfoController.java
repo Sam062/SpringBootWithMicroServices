@@ -13,7 +13,7 @@ import base.service.IContactService;
 
 @Controller
 public class ContactInfoController {
-	
+
 	@Autowired
 	private IContactService service;
 
@@ -27,7 +27,13 @@ public class ContactInfoController {
 	@PostMapping("/add")
 	public String readFormData(@ModelAttribute("contact")ContactModel contact, RedirectAttributes model) {
 		System.out.println(contact);
-		model.addFlashAttribute("msg", "Contact Read Successfully");
+
+		Boolean result=service.saveContact(contact);
+		if(result)
+			model.addFlashAttribute("msg", "Contact Added Successfully");
+		else
+			model.addFlashAttribute("msg", "Contact Couldn't Add !");
+
 		return "redirect:/home";
 	}
 }

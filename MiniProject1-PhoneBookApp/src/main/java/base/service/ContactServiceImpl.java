@@ -2,10 +2,12 @@ package base.service;
 
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import base.entity.ContactDetailsEntity;
+import base.model.ContactModel;
 import base.repo.ContactRepository;
 
 @Service
@@ -15,8 +17,14 @@ public class ContactServiceImpl implements IContactService {
 	private ContactRepository repo;
 
 	@Override
-	public Boolean saveContact(ContactDetailsEntity entity) {
-		return (repo.save(entity)!=null);
+	public Boolean saveContact(ContactModel model) {
+
+		ContactDetailsEntity entity=new ContactDetailsEntity();
+
+		BeanUtils.copyProperties(model, entity);
+		ContactDetailsEntity result=repo.save(entity);
+
+		return (result!=null);
 	}
 
 	@Override

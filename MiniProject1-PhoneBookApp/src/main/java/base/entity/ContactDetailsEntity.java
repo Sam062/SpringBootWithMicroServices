@@ -5,10 +5,12 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Version;
 
 import lombok.Data;
 
@@ -18,7 +20,7 @@ import lombok.Data;
 public class ContactDetailsEntity {
 	@Id
 	@Column(name = "CNTCT_ID")
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer contactID;
 
 	@Column(name = "CNTCT_NM")
@@ -35,6 +37,7 @@ public class ContactDetailsEntity {
 	private Date createdDate;
 
 
+	@Version
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "UPDATED_DATE")
 	private Date updatedDate;

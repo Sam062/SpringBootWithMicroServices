@@ -31,14 +31,14 @@
 					<td>CONTACT NUMBER &nbsp;</td>
 					<td><form:input path="contactNumber" /></td>
 				</tr>
-				<tr>
-					<td>CREATED DATE</td>
-					<td><form:input path="createdDate" /></td>
-				</tr>
-				<tr>
-					<td>UPDATED DATE</td>
-					<td><form:input path="updatedDate" /></td>
-				</tr>
+				<!-- 				<tr> -->
+				<!-- 					<td>CREATED DATE</td> -->
+				<%-- 					<td><form:input path="createdDate" /></td> --%>
+				<!-- 				</tr> -->
+				<!-- 				<tr> -->
+				<!-- 					<td>UPDATED DATE</td> -->
+				<%-- 					<td><form:input path="updatedDate" /></td> --%>
+				<!-- 				</tr> -->
 				<tr>
 					<td align="right"><input type="submit" class="btn btn-primary"
 						value="ADD" /></td>

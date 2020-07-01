@@ -30,7 +30,7 @@ public class ContactInfoController {
 
 		Boolean result=service.saveContact(contact);
 		if(result)
-			model.addFlashAttribute("msg", "Contact Added Successfully");
+			model.addFlashAttribute("msg", "Contact Added Successfully with NAME-"+contact.getContactName());
 		else
 			model.addFlashAttribute("msg", "Contact Couldn't Add !");
 

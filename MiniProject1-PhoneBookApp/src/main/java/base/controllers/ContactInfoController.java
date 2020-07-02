@@ -26,11 +26,9 @@ public class ContactInfoController {
 
 	@PostMapping("/add")
 	public String readFormData(@ModelAttribute("contact")ContactModel contact, RedirectAttributes model) {
-		System.out.println(contact);
-
 		Boolean result=service.saveContact(contact);
 		if(result)
-			model.addFlashAttribute("msg", "Contact Added Successfully with NAME-"+contact.getContactName());
+			model.addFlashAttribute("msg", "Contact Added Successfully with NAME : "+contact.getContactName());
 		else
 			model.addFlashAttribute("msg", "Contact Couldn't Add !");
 

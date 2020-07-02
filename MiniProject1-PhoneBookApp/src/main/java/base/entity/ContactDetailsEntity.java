@@ -7,10 +7,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Version;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import lombok.Data;
 
@@ -20,7 +23,8 @@ import lombok.Data;
 public class ContactDetailsEntity {
 	@Id
 	@Column(name = "CNTCT_ID")
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@SequenceGenerator(name = "CNTCT_ID_SEQ", sequenceName = "CNTCT_ID_SEQ", allocationSize = 1)
+	@GeneratedValue(generator = "CNTCT_ID_SEQ", strategy = GenerationType.SEQUENCE)
 	private Integer contactID;
 
 	@Column(name = "CNTCT_NM")
@@ -32,13 +36,15 @@ public class ContactDetailsEntity {
 	@Column(name = "CNTCT_EMAIL")
 	private String contactEmail;
 
+
 	@Column(name = "CREATED_DATE")
+	@CreationTimestamp
 	@Temporal(TemporalType.DATE)
 	private Date createdDate;
 
 
-	@Version
-	@Temporal(TemporalType.TIMESTAMP)
+	@UpdateTimestamp
+	@Temporal(TemporalType.DATE)
 	@Column(name = "UPDATED_DATE")
 	private Date updatedDate;
 }

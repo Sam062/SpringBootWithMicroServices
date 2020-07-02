@@ -1,6 +1,5 @@
 package base.service;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.BeanUtils;
@@ -23,8 +22,6 @@ public class ContactServiceImpl implements IContactService {
 		ContactDetailsEntity entity=new ContactDetailsEntity();
 
 		BeanUtils.copyProperties(model, entity);
-		entity.setCreatedDate(new Date(System.currentTimeMillis()));
-		entity.setUpdatedDate(new Date(System.currentTimeMillis()));
 		ContactDetailsEntity result=repo.save(entity);
 
 		return (result!=null);

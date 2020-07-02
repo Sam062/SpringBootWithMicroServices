@@ -8,9 +8,8 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 </head>
 <body>
+	<%@include file="Header.jsp"%>
 	<div class="container" align="center">
-		<h1 class="text text-primary">Welcome To Phone Book App</h1>
-		<hr>
 		<form:form action="/add" method="POST" modelAttribute="Model">
 
 			<table class="table-hover">

@@ -7,8 +7,8 @@ import base.model.ContactModel;
 
 public interface IContactService {
 	public Boolean saveContact(ContactModel model);
-	public List<ContactDetailsEntity> getAllContacts();
-	public ContactDetailsEntity getContactByID(Integer contactID);
-	public Boolean updateContact(ContactDetailsEntity entity);
+	public List<ContactModel> getAllContacts();
+	public ContactModel getContactByID(Integer contactID);
+	public Boolean updateContact(ContactModel model);
 	public Boolean deleteContact(Integer contactID);
 }

@@ -1,6 +1,9 @@
 package base.service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,26 +31,49 @@ public class ContactServiceImpl implements IContactService {
 	}
 
 	@Override
-	public List<ContactDetailsEntity> getAllContacts() {
-		return repo.findAll();
+	public List<ContactModel> getAllContacts() {
+
+		List<ContactDetailsEntity> list=repo.findAll();
+		List<ContactModel> listOfContactModel=list.stream().map(entity->{
+			ContactModel model=new ContactModel();
+			BeanUtils.copyProperties(entity, model);
+			return model;
+		}).collect(Collectors.toList());
+		return listOfContactModel;
 	}
 
 	@Override
-	public ContactDetailsEntity getContactByID(Integer contactID) {
-		// TODO Auto-generated method stub
-		return null;
+	public ContactModel getContactByID(Integer contactID) {
+		Optional<ContactDetailsEntity> entity=repo.findById(contactID);
+		ContactDetailsEntity contactDetailEntity=entity.get();
+
+		ContactModel contactModel=new ContactModel();
+
+		BeanUtils.copyProperties(contactDetailEntity, contactModel);
+		return contactModel;
 	}
 
 	@Override
-	public Boolean updateContact(ContactDetailsEntity entity) {
-		// TODO Auto-generated method stub
-		return null;
+	public Boolean updateContact(ContactModel model) {
+		ContactDetailsEntity entity=new ContactDetailsEntity();
+		
+		BeanUtils.copyProperties(model, entity);
+		
+		ContactDetailsEntity savedEntity=repo.save(entity);
+		if(savedEntity!=null)
+			return true;
+		return false;
 	}
 
 	@Override
 	public Boolean deleteContact(Integer contactID) {
-		// TODO Auto-generated method stub
-		return null;
+		Optional<ContactDetailsEntity> op=repo.findById(contactID);
+		ContactDetailsEntity entity=op.get();
+		if(entity!=null) {
+			repo.delete(entity);
+			return true;
+		}
+		return false;
 	}
 
 }

@@ -37,7 +37,7 @@ public class ContactDetailsEntity {
 	private String contactEmail;
 
 
-	@Column(name = "CREATED_DATE")
+	@Column(name = "CREATED_DATE",updatable = false)
 	@CreationTimestamp
 	@Temporal(TemporalType.DATE)
 	private Date createdDate;
@@ -45,6 +45,6 @@ public class ContactDetailsEntity {
 
 	@UpdateTimestamp
 	@Temporal(TemporalType.DATE)
-	@Column(name = "UPDATED_DATE")
+	@Column(name = "UPDATED_DATE",insertable = false)
 	private Date updatedDate;
 }

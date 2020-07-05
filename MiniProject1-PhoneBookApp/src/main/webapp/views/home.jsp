@@ -19,6 +19,9 @@
 					</td>
 				</tr>
 				<tr>
+					<td><form:hidden path="contactID" /></td>
+				</tr>
+				<tr>
 					<td>CONTACT NAME</td>
 					<td><form:input path="contactName" /></td>
 				</tr>
@@ -33,7 +36,7 @@
 
 				<tr>
 					<td align="right"><input type="submit" class="btn btn-primary"
-						value="ADD" /></td>
+						value="SAVE" /></td>
 					<td align="center"><input type="reset" class="btn btn-danger"
 						value="RESET" /></td>
 				</tr>

@@ -2,7 +2,6 @@ package base.service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.BeanUtils;
@@ -21,9 +20,7 @@ public class ContactServiceImpl implements IContactService {
 
 	@Override
 	public Boolean saveContact(ContactModel model) {
-
 		ContactDetailsEntity entity=new ContactDetailsEntity();
-
 		BeanUtils.copyProperties(model, entity);
 		ContactDetailsEntity result=repo.save(entity);
 
@@ -51,18 +48,6 @@ public class ContactServiceImpl implements IContactService {
 
 		BeanUtils.copyProperties(contactDetailEntity, contactModel);
 		return contactModel;
-	}
-
-	@Override
-	public Boolean updateContact(ContactModel model) {
-		ContactDetailsEntity entity=new ContactDetailsEntity();
-		
-		BeanUtils.copyProperties(model, entity);
-		
-		ContactDetailsEntity savedEntity=repo.save(entity);
-		if(savedEntity!=null)
-			return true;
-		return false;
 	}
 
 	@Override

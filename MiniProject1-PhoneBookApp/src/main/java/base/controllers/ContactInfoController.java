@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import base.model.ContactModel;
@@ -48,21 +49,20 @@ public class ContactInfoController {
 	}
 
 	@GetMapping("/delete")
-	public String deleteData(@ModelAttribute("id")Integer id,Model model) {
+	public String deleteData(@RequestParam("id")Integer id,RedirectAttributes model) {
 		boolean result=service.deleteContact(id);
-		if(result)
-			model.addAttribute("msg","Contact Deleted.");
+		if(result) {
+			model.addFlashAttribute("msg","Contact Deleted.");
+			return "redirect:/all";
+		}
 		else
 			model.addAttribute("msg", "Contact not deleted.");
-
-		List<ContactModel> contacts=service.getAllContacts();
-		model.addAttribute("list", contacts);
 
 		return "data";
 	}
 
 	@GetMapping("/edit")
-	public String showEditPage(@ModelAttribute("id")Integer id,Model model) {
+	public String showEditPage(@RequestParam("id")Integer id,Model model) {
 		ContactModel contact=service.getContactByID(id);
 		model.addAttribute("Model", contact);
 		return "home";

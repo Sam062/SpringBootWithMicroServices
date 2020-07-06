@@ -52,7 +52,7 @@
 						<td>${list.contactEmail}</td>
 						<td>${list.contactNumber}</td>
 						<td><a href="edit?id=${list.contactID}"
-							class="btn btn-success btn-sm">EDIT</a> | <a
+							class="btn btn-success btn-sm">EDIT</a> &nbsp; <a
 							href="delete?id=${list.contactID}" onclick="deleteConfirm()"
 							class="btn btn-danger btn-sm">DELETE</a></td>
 					</tr>

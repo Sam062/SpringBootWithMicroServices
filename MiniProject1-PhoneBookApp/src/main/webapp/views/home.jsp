@@ -23,15 +23,15 @@
 				</tr>
 				<tr>
 					<td>CONTACT NAME</td>
-					<td><form:input path="contactName" /></td>
+					<td><form:input path="contactName" required="required"/></td>
 				</tr>
 				<tr>
 					<td>CONTACT EMAIL</td>
-					<td><form:input path="contactEmail" /></td>
+					<td><form:input path="contactEmail" required="required"/></td>
 				</tr>
 				<tr>
 					<td>CONTACT NUMBER &nbsp;</td>
-					<td><form:input path="contactNumber" /></td>
+					<td><form:input path="contactNumber" required="required"/></td>
 				</tr>
 
 				<tr>

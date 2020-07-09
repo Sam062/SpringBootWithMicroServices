@@ -42,21 +42,26 @@ public class ContactServiceImpl implements IContactService {
 	@Override
 	public ContactModel getContactByID(Integer contactID) {
 		Optional<ContactDetailsEntity> entity=repo.findById(contactID);
-		ContactDetailsEntity contactDetailEntity=entity.get();
+		ContactModel contactModel=null;
+		if(entity.isPresent()) {
+			ContactDetailsEntity contactDetailEntity=entity.get();
 
-		ContactModel contactModel=new ContactModel();
+			contactModel=new ContactModel();
 
-		BeanUtils.copyProperties(contactDetailEntity, contactModel);
+			BeanUtils.copyProperties(contactDetailEntity, contactModel);
+		}
 		return contactModel;
 	}
 
 	@Override
 	public Boolean deleteContact(Integer contactID) {
 		Optional<ContactDetailsEntity> op=repo.findById(contactID);
-		ContactDetailsEntity entity=op.get();
-		if(entity!=null) {
-			repo.delete(entity);
-			return true;
+		if(op.isPresent()) {
+			ContactDetailsEntity entity=op.get();
+			if(entity!=null) {
+				repo.delete(entity);
+				return true;
+			}
 		}
 		return false;
 	}

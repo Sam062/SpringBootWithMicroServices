@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import base.entity.ContactDetailsEntity;
+import base.exceptions.PhonebookAppException;
 import base.model.ContactModel;
 import base.repo.ContactRepository;
 
@@ -20,48 +21,70 @@ public class ContactServiceImpl implements IContactService {
 
 	@Override
 	public Boolean saveContact(ContactModel model) {
-		ContactDetailsEntity entity=new ContactDetailsEntity();
-		BeanUtils.copyProperties(model, entity);
-		ContactDetailsEntity result=repo.save(entity);
+		boolean isSaved=false;
+		try {
+			ContactDetailsEntity entity=new ContactDetailsEntity();
+			BeanUtils.copyProperties(model, entity);
+			ContactDetailsEntity result=repo.save(entity);
+			if(result!=null)
+				isSaved=true;
+		} catch (Exception e) {
+			throw new PhonebookAppException();
+		}
 
-		return (result!=null);
+		return isSaved;
 	}
 
 	@Override
 	public List<ContactModel> getAllContacts() {
+		List<ContactDetailsEntity> list=null;
+		List<ContactModel> listOfContactModel=null;
+		try {
+			list=repo.findAll();
+			listOfContactModel=list.stream().map(entity->{
+				ContactModel model=new ContactModel();
+				BeanUtils.copyProperties(entity, model);
+				return model;
+			}).collect(Collectors.toList());
 
-		List<ContactDetailsEntity> list=repo.findAll();
-		List<ContactModel> listOfContactModel=list.stream().map(entity->{
-			ContactModel model=new ContactModel();
-			BeanUtils.copyProperties(entity, model);
-			return model;
-		}).collect(Collectors.toList());
+		} catch (Exception e) {
+			throw new PhonebookAppException();
+		}
 		return listOfContactModel;
 	}
 
 	@Override
 	public ContactModel getContactByID(Integer contactID) {
-		Optional<ContactDetailsEntity> entity=repo.findById(contactID);
 		ContactModel contactModel=null;
-		if(entity.isPresent()) {
-			ContactDetailsEntity contactDetailEntity=entity.get();
+		try {
+			Optional<ContactDetailsEntity> entity=repo.findById(contactID);
+			if(entity.isPresent()) {
+				ContactDetailsEntity contactDetailEntity=entity.get();
 
-			contactModel=new ContactModel();
+				contactModel=new ContactModel();
 
-			BeanUtils.copyProperties(contactDetailEntity, contactModel);
+				BeanUtils.copyProperties(contactDetailEntity, contactModel);
+			}
+
+		} catch (Exception e) {
+			throw new PhonebookAppException();
 		}
 		return contactModel;
 	}
 
 	@Override
 	public Boolean deleteContact(Integer contactID) {
-		Optional<ContactDetailsEntity> op=repo.findById(contactID);
-		if(op.isPresent()) {
-			ContactDetailsEntity entity=op.get();
-			if(entity!=null) {
-				repo.delete(entity);
-				return true;
+		try {
+			Optional<ContactDetailsEntity> op=repo.findById(contactID);
+			if(op.isPresent()) {
+				ContactDetailsEntity entity=op.get();
+				if(entity!=null) {
+					repo.delete(entity);
+					return true;
+				}
 			}
+		} catch (Exception e) {
+			throw new PhonebookAppException();
 		}
 		return false;
 	}

@@ -1,0 +1,15 @@
+server:
+  port: 9935
+
+spring:
+  datasource:    url: jdbc:h2:mem:testdb    driver-class-name: org.h2.Driver
+    username: user
+    password: 
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect    show-sql: true
+    format_sql: true 
+    properties:
+      hibernate:
+        ddl.auto: update
+        dialect : org.hibernate.dialect.H2Dialect
+    

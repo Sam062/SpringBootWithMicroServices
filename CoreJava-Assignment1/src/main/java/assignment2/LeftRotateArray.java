@@ -1,9 +1,20 @@
 package assignment2;
 
-public class RotateArray {
+import java.util.Scanner;
+
+public class LeftRotateArray {
 	public static void main(String[] args) {
-		int[] arr= {1,2,3,4,5,6,7}; 	// OUTPUT- 5 , 6 , 7 , 1 , 2 , 3 , 4
-		int pos=3;
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Input Array SIZE :");
+		int size=sc.nextInt();
+		int[] arr= new int[size]; 	// OUTPUT- 5 , 6 , 7 , 1 , 2 , 3 , 4
+		System.out.println("Input Array Elements :");
+		for (int i = 0; i < arr.length; i++) {
+			arr[i]=sc.nextInt();
+		}
+		System.out.println("Input Position to Rotate :");
+		int pos=sc.nextInt();
+
 		if(pos<0 || pos>=arr.length-1)
 			System.out.println("INVALID POSITION");
 		else {
